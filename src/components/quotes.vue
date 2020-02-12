@@ -13,11 +13,22 @@ export default {
       status: ""
     };
   },
+  created: function() {
+    this.load();
+  },
   mounted() {
     axios
-      .get("ron-swanson-quotes.herokuapp.com/v2/quotes")
-      .then(response => (this.status = response.data[5]))
+      .get("http://ron-swanson-quotes.herokuapp.com/v2/quotes/50")
+      .then(response => (this.status = response.data))
       .catch(error => (this.status = error));
+  },
+  methods: {
+    load: function() {
+      this.status = "loading the quotes...";
+    },
+    lol() {
+      console.log(this.quotes);
+    }
   }
 };
 </script>

@@ -7,7 +7,7 @@
         >Home</router-link
       ><br />
       <router-link
-        to="/cat"
+        to="/favQuotes"
         class="p-3 hover:bg-blue-500 text-blue-700 hover:text-white rounded transition duration-400"
         >favorite books</router-link
       >
