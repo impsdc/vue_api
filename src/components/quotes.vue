@@ -1,9 +1,14 @@
 <template>
-  <div>
-    <span>{{ this.status }}</span>
-    <ul>
-      <li v-for="(index, i) in list" :key="i">
+  <div class="flex justify-center flex-col items-center">
+    <span class="text-center text-2xl w-full">{{ this.status }}</span>
+    <ul class="w-5/6 py-5">
+      <li
+        v-for="(index, i) in list"
+        :key="i"
+        class="px-1 py-3 w-full flex justify-between items-center border-2 border-gray-200 rounded my-1"
+      >
         {{ list[i] }}
+        <input type="checkbox" v-model="checkedQuotes" :id="list[i]" />
       </li>
     </ul>
   </div>
@@ -16,7 +21,9 @@ export default {
   data() {
     return {
       status: null,
-      list: []
+      list: [],
+      checkedQuotes: [],
+      checked: true
     };
   },
   created: function() {
@@ -24,20 +31,21 @@ export default {
   },
   mounted() {
     axios
-      .get("http://ron-swanson-quotes.herokuapp.com/v2/quotes/5")
+      .get("http://ron-swanson-quotes.herokuapp.com/v2/quotes/10")
       .then(response => {
         this.list = response.data;
         this.status = "";
       })
       .catch(error => (this.status = error));
-    console.log(this.list);
   },
   methods: {
     load: function() {
       this.status = "loading the quotes...";
-    },
-    lol() {
-      console.log(this.quotes);
+    }
+  },
+  watch: {
+    checkedQuotes: () => {
+      console.log(this.id);
     }
   }
 };

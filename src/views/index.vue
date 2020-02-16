@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-center">Listing of quotes</h1>
+    <h1 class="text-center text-3xl">Listing of quotes</h1>
     <apiQuotes />
   </div>
 </template>
