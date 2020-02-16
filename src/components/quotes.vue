@@ -1,6 +1,11 @@
 <template>
   <div>
-    {{ status }}
+    <span>{{ this.status }}</span>
+    <ul>
+      <li v-for="(index, i) in list" :key="i">
+        {{ list[i] }}
+      </li>
+    </ul>
   </div>
 </template>
 <script>
@@ -10,7 +15,8 @@ export default {
   name: "apiQuotes",
   data() {
     return {
-      status: ""
+      status: null,
+      list: []
     };
   },
   created: function() {
@@ -18,9 +24,13 @@ export default {
   },
   mounted() {
     axios
-      .get("http://ron-swanson-quotes.herokuapp.com/v2/quotes/50")
-      .then(response => (this.status = response.data))
+      .get("http://ron-swanson-quotes.herokuapp.com/v2/quotes/5")
+      .then(response => {
+        this.list = response.data;
+        this.status = "";
+      })
       .catch(error => (this.status = error));
+    console.log(this.list);
   },
   methods: {
     load: function() {
